@@ -1,6 +1,6 @@
 # MERN_foodhub
 <div align="center">
-    <h1 style="color: tomato;">MernEats.com</h1>
+    <h1 style="color: tomato;">FoodHub.com</h1>
 
 This application is deployed on Render. Please check it out [here](https://github.com/Amiyansu/MERN_foodhub).
 
