@@ -7,20 +7,36 @@ import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 
-//app config
+// app config
 const app = express();
 const port = process.env.PORT || 8000;
 
-//middlewaree
-app.use(cors());
+// CORS configuration
+const allowedOrigins = [
+  'https://mern-foodhub-frontend.vercel.app',
+  'https://mern-foodhub-admin.vercel.app'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+// Middleware
 app.use(express.json());
 
-//DB connection
+// DB connection
 connectDB();
 
 // API endpoints
 app.use("/api/food", foodRouter);
-app.use("/images", express.static("uploads")); //access of uploaded images from uploads folder
+app.use("/images", express.static("uploads")); // access of uploaded images from uploads folder
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
@@ -32,3 +48,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server started on http://localhost:${port}`);
 });
+
+export default app;
