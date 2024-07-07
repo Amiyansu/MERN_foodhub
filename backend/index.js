@@ -7,11 +7,9 @@ import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 
-// app config
 const app = express();
 const port = process.env.PORT || 8000;
 
-// CORS configuration
 const allowedOrigins = [
   'https://mern-foodhub-frontend.vercel.app',
   'https://mern-foodhub-admin.vercel.app'
@@ -30,15 +28,15 @@ app.use(cors({
   allowedHeaders: "Content-Type,Authorization"
 }));
 
-// Middleware
 app.use(express.json());
 
-// DB connection
-connectDB();
+connectDB().catch(err => {
+  console.error("Failed to connect to database", err);
+  process.exit(1);
+});
 
-// API endpoints
 app.use("/api/food", foodRouter);
-app.use("/images", express.static("uploads")); // access of uploaded images from uploads folder
+app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
@@ -47,7 +45,6 @@ app.get("/", (req, res) => {
   res.send("API Working");
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
