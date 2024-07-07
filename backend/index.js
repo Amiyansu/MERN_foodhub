@@ -25,7 +25,9 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true,
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization"
 }));
 
 // Middleware
@@ -43,6 +45,12 @@ app.use("/api/order", orderRouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
 app.listen(port, () => {
