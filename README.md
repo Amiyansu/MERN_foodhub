@@ -4,7 +4,7 @@
 
 This application is deployed on Render. Please check it out [here](https://github.com/Amiyansu/MERN_foodhub).
 
-![MernEats](frontend/src/assets/header_img.png)
+![MernEats](frontend/src/assets/food_32.png)
 
 </div>
 
