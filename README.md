@@ -2,7 +2,7 @@
 <div align="center">
     <h1 style="color: tomato;">FoodHub.com</h1>
 
-This application is deployed on Render. Please check it out [here](https://github.com/Amiyansu/MERN_foodhub).
+This application is deployed on Vercel. Please check it out [here](mern-foodhub-frontend.vercel.app/).
 
 ![MernEats](frontend/src/assets/food_32.png)
 
